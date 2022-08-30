@@ -95,7 +95,6 @@ class MyGui(QMainWindow):
                 message_box = QMessageBox()
                 message_box.setText("Mail sending Failed!")
                 message_box.exec() 
-
     def fetch(self):
     
         imap = imaplib.IMAP4_SSL(self.imapField.text())
