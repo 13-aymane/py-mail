@@ -28,7 +28,23 @@ class MyGui(QMainWindow):
             self.server.starttls()
             self.server.ehlo()
             self.server.login(self.emailField.text(), self.pwdField.text())
-
+            #Login Fields
+            self.emailField.setEnabled(False)
+            self.smtpField.setEnabled(False)
+            self.portField.setEnabled(False)
+            self.pwdField.setEnabled(False)
+            self.loginButton.setEnabled(False)
+            self.imapField.setEnabled(False)
+            #Send Fields
+            self.toField.setEnabled(True)
+            self.subjectField.setEnabled(True)
+            self.attachButton.setEnabled(True)
+            self.textField.setEnabled(True)
+            self.sendButton.setEnabled(True)
+            #Fetch Fields
+            
+            self.fetchField.setEnabled(True)
+            self.fetchButton.setEnabled(True)
 
             self.msg=MIMEMultipart()
 
@@ -68,18 +84,16 @@ class MyGui(QMainWindow):
                 self.msg['From'] = "Aymane"
                 self.msg['To'] = self.toField.text()
                 self.msg['Subject'] = self.subjectField.text()
-                
-                self.msg.attach(MIMEText(self.textField.toPlaintext(), 'plain'))
-                txt_msg = self.msg.as_string()
-
-                self.server.sendmail(self.emailField.text(), self.toField.text(), txt_msg)
+                self.msg.attach(MIMEText(self.textField.toPlainText(), 'plain'))
+                text = self.msg.as_string()
+                self.server.sendmail(self.emailField.text(), self.toField.text(), text)
                 
                 message_box = QMessageBox()
                 message_box.setText("Mail sent!")
                 message_box.exec()
             except:
                 message_box = QMessageBox()
-                message_box.setText("Mail Sending Failed!")
+                message_box.setText("Mail sending Failed!")
                 message_box.exec() 
 
     def fetch(self):
@@ -87,12 +101,12 @@ class MyGui(QMainWindow):
         imap = imaplib.IMAP4_SSL(self.imapField.text())
         imap.login(self.emailField.text(),self.pwdField.text())
 
-        imap.select("Inbox")
+        imap.select("Sent")
 
-        _, msgnum = imap.search(None, "ALL")
+        _, msgnums = imap.search(None, "ALL")
 
-        for msgnum in msgnum[0].split():
-            _, data = imap.fetch(msgnum, "(RFC822")
+        for msgnum in msgnums[0].split():
+            _, data = imap.fetch(msgnum, "(RFC822)")
 
         message = email.message_from_bytes(data[0][1])
 
@@ -109,7 +123,7 @@ class MyGui(QMainWindow):
                 if part.get_content_type() == "text/plain":
                     print(part.as_string())
 
-        self.fetchField.append(str(output))
+        self.fetchField.append(str(output()))
         imap.close()
 
 app = QApplication([])
