@@ -26,13 +26,73 @@
     <property name="currentIndex">
      <number>1</number>
     </property>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+     <widget class="QPushButton" name="fetchButton">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>10</y>
+        <width>121</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Fetch your Mail</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="fetchField">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>621</width>
+        <height>451</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="imapField">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>10</y>
+        <width>201</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_imap">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>10</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>IMAP Server</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="tab">
      <attribute name="title">
       <string>Tab 1</string>
      </attribute>
      <widget class="QTextEdit" name="textField">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -45,7 +105,7 @@
      </widget>
      <widget class="QLineEdit" name="toField">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -58,7 +118,7 @@
      </widget>
      <widget class="QPushButton" name="attachButton">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -100,7 +160,7 @@
      </widget>
      <widget class="QLineEdit" name="subjectField">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -126,7 +186,7 @@
      </widget>
      <widget class="QPushButton" name="sendButton">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -154,66 +214,6 @@
       </property>
       <property name="wordWrap">
        <bool>true</bool>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Tab 2</string>
-     </attribute>
-     <widget class="QPushButton" name="fetchButton">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>510</x>
-        <y>10</y>
-        <width>121</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Fetch your Mail</string>
-      </property>
-     </widget>
-     <widget class="QTextEdit" name="fetchField">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>621</width>
-        <height>451</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="imapField">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>10</y>
-        <width>201</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_imap">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>10</y>
-        <width>71</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>IMAP Server</string>
       </property>
      </widget>
     </widget>
@@ -254,7 +254,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="serverField">
+   <widget class="QLineEdit" name="smtpField">
     <property name="geometry">
      <rect>
       <x>160</x>

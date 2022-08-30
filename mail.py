@@ -16,7 +16,7 @@ class MyGui(QMainWindow):
         super(MyGui, self).__init__()
         uic.loadUi("mail.ui",self)
         self.show()
-
+        
         self.loginButton.clicked.connect(self.login)
         self.attachButton.clicked.connect(self.attach)
         self.sendButton.clicked.connect(self.send)
@@ -29,22 +29,13 @@ class MyGui(QMainWindow):
             self.server.ehlo()
             self.server.login(self.emailField.text(), self.pwdField.text())
 
-            self.emailField.setEnabled(False)
-            self.smtpField.setEnabled(False)
-            self.pwdField.setEnabled(False)
-            self.portField.setEnabled(False)
-            self.loginField.setEnabled(False)
-
-            self.toField.setEnabled(True)
-            self.subjectField.setEnabled(True)
-            self.textField.setEnabled(True)
-            self.attachButton.setEnabled(True)
-            self.sendButton.setEnabled(True)
-            self.fetchButton.setEnabled(True)
-            self.fecthField.setEnabled(True)
-            self.imapField.setEnabled(True)
 
             self.msg=MIMEMultipart()
+
+            message_box = QMessageBox()
+            message_box.setText("Login Successful!")
+            message_box.exec() 
+
         except smtplib.SMTPAuthenticationError:
             message_box = QMessageBox()
             message_box.setText("Invalid Login Information")
@@ -69,8 +60,8 @@ class MyGui(QMainWindow):
     def send (self):
         dialog=QMessageBox()
         dialog.setText("Do you want to send this mail?")
-        dialog.addbutton(QPushButton("Yes"), QMessageBox.YesRole)
-        dialog.addbutton(QPushButton("No"), QMessageBox.NoRole)
+        dialog.addButton(QPushButton("Yes"), QMessageBox.YesRole)
+        dialog.addButton(QPushButton("No"), QMessageBox.NoRole)
 
         if dialog.exec_() == 0:
             try:
