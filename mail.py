@@ -101,7 +101,7 @@ class MyGui(QMainWindow):
         imap = imaplib.IMAP4_SSL(self.imapField.text())
         imap.login(self.emailField.text(),self.pwdField.text())
 
-        imap.select("Sent")
+        imap.select("Inbox")
 
         _, msgnums = imap.search(None, "ALL")
 
@@ -110,20 +110,19 @@ class MyGui(QMainWindow):
 
         message = email.message_from_bytes(data[0][1])
 
-        def output():
-            print(f"Message Number: {msgnum}")
-            print(f"From: {message.get('From')}")
-            print(f"To: {message.get('To')}")
-            print(f"BCC: {message.get('BCC')}")
-            print(f"Date: {message.get('Date')}")
-            print(f"Subject: {message.get('From')}")
+        self.fetchField.setPlainText(f"Message Number: {msgnum}")
+        self.fetchField.setPlainText(f"From: {message.get('From')}")
+        self.fetchField.setPlainText(f"To: {message.get('To')}")
+        self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+        self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+        self.fetchField.setPlainText(f"Subject: {message.get('From')}")
 
-            print(f"Content:")
-            for part in message.walk():
-                if part.get_content_type() == "text/plain":
-                    print(part.as_string())
+        self.fetchField.setPlainText(f"Content:")
+        for part in message.walk():
+            if part.get_content_type() == "text/plain":
+                self.fetchField.setPlainText(part.as_string())
 
-        self.fetchField.append(str(output()))
+        
         imap.close()
 
 app = QApplication([])

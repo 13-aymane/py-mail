@@ -227,6 +227,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="text">
+     <string>aymane--13@outlook.com</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="smtpField">
     <property name="geometry">
@@ -237,6 +240,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="text">
+     <string>smtp-mail.outlook.com</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="portField">
     <property name="geometry">
@@ -246,6 +252,9 @@
       <width>61</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>587</string>
     </property>
     <property name="echoMode">
      <enum>QLineEdit::Normal</enum>
@@ -299,6 +308,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="text">
+     <string>aout131995</string>
+    </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
     </property>
@@ -314,6 +326,9 @@
       <width>131</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>outlook.office365.com</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_imap">
