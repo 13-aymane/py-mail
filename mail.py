@@ -67,15 +67,20 @@ class MyGui(QMainWindow):
             try:
                 self.msg['From'] = "Aymane"
                 self.msg['To'] = self.toField.text()
-                self.msg['Subject'] = self.SubjectField.text()
-                self.msg.attach(MIMEText(self.textField.text(), 'plain'))
-                text = self.msg.as_string()
-                self.server.sendmail(self.emailField.text(), self.toField.text(), text)
+                self.msg['Subject'] = self.subjectField.text()
+                
+                self.msg.attach(MIMEText(self.textField.toPlaintext(), 'plain'))
+                txt_msg = self.msg.as_string()
+
+                self.server.sendmail(self.emailField.text(), self.toField.text(), txt_msg)
+                
                 message_box = QMessageBox()
                 message_box.setText("Mail sent!")
                 message_box.exec()
             except:
-                pass 
+                message_box = QMessageBox()
+                message_box.setText("Mail Sending Failed!")
+                message_box.exec() 
 
     def fetch(self):
     
@@ -84,7 +89,7 @@ class MyGui(QMainWindow):
 
         imap.select("Inbox")
 
-        _,msgnums = imap.search(None, "ALL")
+        _, msgnum = imap.search(None, "ALL")
 
         for msgnum in msgnum[0].split():
             _, data = imap.fetch(msgnum, "(RFC822")
