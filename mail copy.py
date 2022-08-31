@@ -108,6 +108,7 @@ class MyGui(QMainWindow):
                 self.msg.attach(MIMEText(self.textField.toPlainText(), 'plain'))
                 text = self.msg.as_string()
                 self.server.sendmail(self.emailField.text(), self.toField.text(), text)
+
                 
                 message_box = QMessageBox()
                 message_box.setText("Mail sent!")
@@ -170,7 +171,6 @@ class MyGui(QMainWindow):
         query="SELECT * FROM domains"
         results = c.execute(query) 
         self.tableWidget.setRowCount(0)
-        #print(c.fetchall())
         for row_number, row_data in enumerate(results):
             self.tableWidget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
