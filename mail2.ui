@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>724</width>
+    <width>772</width>
     <height>767</height>
    </rect>
   </property>
@@ -17,14 +17,14 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>140</y>
-      <width>671</width>
+      <x>30</x>
+      <y>110</y>
+      <width>711</width>
       <height>591</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab_fetch">
      <attribute name="title">
@@ -195,6 +195,343 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Domains</string>
+     </attribute>
+     <widget class="QLineEdit" name="domainField">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>22</y>
+        <width>197</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="smtp_portField">
+      <property name="geometry">
+       <rect>
+        <x>368</x>
+        <y>50</y>
+        <width>196</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Normal</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="addButton">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>110</y>
+        <width>77</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add Domain</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_imap_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>78</y>
+        <width>84</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>IMAP Server :</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="smtpField">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>50</y>
+        <width>197</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="imap_portField">
+      <property name="geometry">
+       <rect>
+        <x>368</x>
+        <y>78</y>
+        <width>196</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Normal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_port_2">
+      <property name="geometry">
+       <rect>
+        <x>293</x>
+        <y>78</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>IMAP  Port :</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="imapField_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>78</y>
+        <width>197</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_port_3">
+      <property name="geometry">
+       <rect>
+        <x>293</x>
+        <y>50</y>
+        <width>69</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>SMTP Port :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_server_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>50</y>
+        <width>84</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>SMTP Server :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>22</y>
+        <width>84</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Domain :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>130</y>
+        <width>287</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>List of Domains :</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="listButton">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>110</y>
+        <width>77</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>List Domains</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>170</y>
+        <width>571</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>611</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="lineWidth">
+       <number>5</number>
+      </property>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Domain Name</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="background">
+        <color>
+         <red>175</red>
+         <green>231</green>
+         <blue>230</blue>
+        </color>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>SMTP Server</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="background">
+        <color>
+         <red>175</red>
+         <green>231</green>
+         <blue>230</blue>
+        </color>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>SMTP Port</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="background">
+        <color>
+         <red>175</red>
+         <green>231</green>
+         <blue>230</blue>
+        </color>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>IMAP Server</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="background">
+        <color>
+         <red>175</red>
+         <green>231</green>
+         <blue>230</blue>
+        </color>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>IMAP Port</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="background">
+        <color>
+         <red>175</red>
+         <green>231</green>
+         <blue>230</blue>
+        </color>
+       </property>
+      </column>
+     </widget>
+    </widget>
    </widget>
    <widget class="QLabel" name="label_email">
     <property name="geometry">
@@ -213,7 +550,7 @@
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>120</y>
+      <y>80</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -235,35 +572,6 @@
      <string>aymane--13@outlook.com</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="smtpField">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>80</y>
-      <width>151</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>smtp-mail.outlook.com</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="portField">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>80</y>
-      <width>61</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>587</string>
-    </property>
-    <property name="echoMode">
-     <enum>QLineEdit::Normal</enum>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_pwd">
     <property name="geometry">
      <rect>
@@ -275,32 +583,6 @@
     </property>
     <property name="text">
      <string>Password :</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_port">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>80</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>SMTP Port :</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_server">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>80</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>SMTP Server :</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="pwdField">
@@ -317,35 +599,6 @@
     </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="imapField">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>80</y>
-      <width>131</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>outlook.office365.com</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_imap">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>80</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>IMAP Server :</string>
     </property>
    </widget>
   </widget>

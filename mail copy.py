@@ -1,9 +1,11 @@
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
 import smtplib
 import imaplib
 import email
+import sqlite3
 
 from email import encoders
 from email.mime.text import MIMEText
@@ -12,22 +14,43 @@ from email.mime.multipart import MIMEMultipart
 
 
 class MyGui(QMainWindow):
+    
     def __init__(self):
         super(MyGui, self).__init__()
-        uic.loadUi("mail.ui",self)
+        uic.loadUi("mail2.ui",self)
+        self.tableWidget.setColumnWidth(0,100)
+        self.tableWidget.setColumnWidth(1,150)
+        self.tableWidget.setColumnWidth(2,75)
+        self.tableWidget.setColumnWidth(3,150)
+        self.tableWidget.setColumnWidth(4,75)
         self.show()
+        self.list()
         
         self.loginButton.clicked.connect(self.login)
         self.attachButton.clicked.connect(self.attach)
         self.sendButton.clicked.connect(self.send)
         self.fetchButton.clicked.connect(self.fetch)
+        self.addButton.clicked.connect(self.add)
+        self.listButton.clicked.connect(self.list)
     def login (self):
         try:
-            self.server = smtplib.SMTP(self.smtpField.text(), self.smtp_portField.text())
+            conn = sqlite3.connect("domains.db")
+            c= conn.cursor()
+            domain = self.emailField.text()
+            x = domain.split("@", 1)
+            target_domain = x[1]
+            query=f"SELECT smtp_server, smtp_port, imap_server, imap_port FROM domains WHERE domain_name = '{target_domain}'"
+            c.execute(query)
+            results = list(c.fetchall())
+            results_tuple = results[0]
+            smtp_server, smtp_port, imap_server, imap_port = results_tuple
+        
+            self.server = smtplib.SMTP(smtp_server, smtp_port)
             self.server.ehlo()
             self.server.starttls()
             self.server.ehlo()
             self.server.login(self.emailField.text(), self.pwdField.text())
+            
             #Login Fields
             self.emailField.setEnabled(False)
             self.smtp_portField.setEnabled(False)
@@ -42,7 +65,6 @@ class MyGui(QMainWindow):
             self.textField.setEnabled(True)
             self.sendButton.setEnabled(True)
             #Fetch Fields
-            
             self.fetchButton.setEnabled(True)
 
             self.msg=MIMEMultipart()
@@ -142,7 +164,40 @@ class MyGui(QMainWindow):
 
         
         imap.close()
-    #def add(self)
+    def list(self):
+        conn = sqlite3.connect("domains.db")
+        c= conn.cursor()
+        query="SELECT * FROM domains"
+        results = c.execute(query) 
+        self.tableWidget.setRowCount(0)
+        #print(c.fetchall())
+        for row_number, row_data in enumerate(results):
+            self.tableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+        conn.close()  
+    def add(self):
+        try:    
+            conn = sqlite3.connect("domains.db")
+            c= conn.cursor()
+            c.execute("INSERT INTO domains VALUES (:domain,:smtp_server, :smtp_port, :imap_server, :imap_port)", 
+            {'domain':self.domainField.text(), 
+            'smtp_server': self.smtpField.text(),
+            'smtp_port':self.smtp_portField.text(),
+            'imap_server': self.imapField.text(),
+            'imap_port':self.imap_portField.text()}
+            )
+            conn.commit()
+            message_box = QMessageBox()
+            message_box.setText("Domain Added Successfully!")
+            message_box.exec()
+            conn.close()
+        except:
+            message_box = QMessageBox()
+            message_box.setText("An Error Has Accured")
+            message_box.exec() 
+
+        
 
 app = QApplication([])
 window = MyGui()
