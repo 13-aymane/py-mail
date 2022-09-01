@@ -1,0 +1,39 @@
+{"intents":[
+    {"tag":"greetings",
+        "patterns": ["Hey", "Hello","Hi","Good moring", "start","hey", "hello","hi","Good moring"],
+        "responses":["Hello sir!", "Hey!", "Hi!"]
+    },
+    {"tag":"plot_chart",
+        "patterns": ["I want you to plot a stock price", "Plot a chart", "Please plot a chart"],
+        "responses":["Ploting chart"]
+    },
+    {"tag":"add_profolio",
+        "patterns": ["Add a stock to my portfolio", "Add a stock", "Add a stock to my portfolio"],
+        "responses":["Adding Stock"]
+    },
+    {"tag":"remove_profolio",
+        "patterns": ["Remove a stock from my portfolio", "Remove a stock", "Remove a stock to my portfolio"],
+        "responses":["Removing Stock"]
+    },
+    {"tag":"show_profolio",
+        "patterns": ["Show me my portfolio", "Show me my investments", "Tell me about my portfolio"],
+        "responses":["Showing Portfolio"]
+    },
+    {"tag":"stock_price",
+    "patterns": ["I want to know the price of a stock"],
+    "responses":["Showing Stock"]
+    },
+    {"tag":"portfolio_worth",
+    "patterns": ["How much is my protfolio worth"],
+    "responses":["Profolio Worth"]
+    },
+    {"tag":"portfolio_gains",
+    "patterns": ["How much are my portfolio gains"],
+    "responses":["Profolio Gains"]
+    },
+    {"tag":"bye",
+    "patterns": ["bye", "goodbye","stop","I have to go","end"],
+    "responses":["Goodbye"]
+    }
+]
+}
