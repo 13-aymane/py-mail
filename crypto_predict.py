@@ -17,7 +17,7 @@ start = dt.datetime(2016, 1, 1)
 end = dt.datetime.now()
 data = web.DataReader(f'{crypto_currency}-{against_currency}', 'yahoo', start, end)
 
-#Prepare Data
+#Preparing the Data
 
 scaler = MinMaxScaler(feature_range=(0,1))
 scaled_data = scaler.fit_transform(data['Close'].values.reshape(-1,1))
@@ -47,7 +47,7 @@ model.add(Dense(units=1))
 model.compile(optimizer='adam', loss ='mean_squared_error')
 model.fit(x_train,y_train, epochs=20, batch_size=32)
 
-#testing
+#Testing the Data
 
 test_start= dt.date(2021,1,1)
 test_end= dt.datetime.now()
@@ -80,7 +80,7 @@ plt.ylabel('Price')
 plt.legend(loc='upper left')
 plt.show()
 
-#predict next day
+#Predicting
 
 real_data= [model_inputs[len(model_inputs) + 1 - prediction_days:len(model_inputs) + 1, 0]]
 real_data = np.array(real_data)
