@@ -1,4 +1,3 @@
-from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
@@ -34,6 +33,7 @@ class MyGui(QMainWindow):
         self.listButton.clicked.connect(self.list)
     def login (self):
         try:
+            #Getting Domain Details
             conn = sqlite3.connect("domains.db")
             c= conn.cursor()
             domain = self.emailField.text()
@@ -44,7 +44,7 @@ class MyGui(QMainWindow):
             results = list(c.fetchall())
             results_tuple = results[0]
             smtp_server, smtp_port, imap_server, imap_port = results_tuple
-        
+            #SMTP
             self.server = smtplib.SMTP(smtp_server, smtp_port)
             self.server.ehlo()
             self.server.starttls()
@@ -53,11 +53,8 @@ class MyGui(QMainWindow):
             
             #Login Fields
             self.emailField.setEnabled(False)
-            self.smtp_portField.setEnabled(False)
-            self.portField.setEnabled(False)
             self.pwdField.setEnabled(False)
             self.loginButton.setEnabled(False)
-            self.imapField.setEnabled(False)
             #Send Fields
             self.toField.setEnabled(True)
             self.subjectField.setEnabled(True)
@@ -118,8 +115,17 @@ class MyGui(QMainWindow):
                 message_box.setText("Mail sending Failed!")
                 message_box.exec() 
     def fetch(self):
-    
-        imap = imaplib.IMAP4_SSL(self.imapField.text())
+        conn = sqlite3.connect("domains.db")
+        c= conn.cursor()
+        domain = self.emailField.text()
+        x = domain.split("@", 1)
+        target_domain = x[1]
+        query=f"SELECT smtp_server, smtp_port, imap_server, imap_port FROM domains WHERE domain_name = '{target_domain}'"
+        c.execute(query)
+        results = list(c.fetchall())
+        results_tuple = results[0]
+        smtp_server, smtp_port, imap_server, imap_port = results_tuple    
+        imap = imaplib.IMAP4_SSL(imap_server, imap_port)
         imap.login(self.emailField.text(),self.pwdField.text())
 
         if self.comboBox.currentText() == "Inbox":
@@ -196,8 +202,6 @@ class MyGui(QMainWindow):
             message_box = QMessageBox()
             message_box.setText("An Error Has Accured")
             message_box.exec() 
-
-        
 
 app = QApplication([])
 window = MyGui()
