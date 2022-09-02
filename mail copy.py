@@ -31,6 +31,7 @@ class MyGui(QMainWindow):
         self.fetchButton.clicked.connect(self.fetch)
         self.addButton.clicked.connect(self.add)
         self.listButton.clicked.connect(self.list)
+        self.testButton.clicked.connect(self.test)
     def login (self):
         try:
             #Getting Domain Details
@@ -50,19 +51,6 @@ class MyGui(QMainWindow):
             self.server.starttls()
             self.server.ehlo()
             self.server.login(self.emailField.text(), self.pwdField.text())
-            
-            #Login Fields
-            self.emailField.setEnabled(False)
-            self.pwdField.setEnabled(False)
-            self.loginButton.setEnabled(False)
-            #Send Fields
-            self.toField.setEnabled(True)
-            self.subjectField.setEnabled(True)
-            self.attachButton.setEnabled(True)
-            self.textField.setEnabled(True)
-            self.sendButton.setEnabled(True)
-            #Fetch Fields
-            self.fetchButton.setEnabled(True)
 
             self.msg=MIMEMultipart()
 
@@ -186,8 +174,9 @@ class MyGui(QMainWindow):
         try:    
             conn = sqlite3.connect("domains.db")
             c= conn.cursor()
-            c.execute("INSERT INTO domains VALUES (:domain,:smtp_server, :smtp_port, :imap_server, :imap_port)", 
-            {'domain':self.domainField.text(), 
+            c.execute("INSERT INTO domains VALUES (:domaini_grp,:domain,:smtp_server, :smtp_port, :imap_server, :imap_port)", 
+            {'domain_grp':self.domaingrpField.text(),
+            'domain':self.domainField.text(), 
             'smtp_server': self.smtpField.text(),
             'smtp_port':self.smtp_portField.text(),
             'imap_server': self.imapField.text(),
@@ -202,7 +191,44 @@ class MyGui(QMainWindow):
             message_box = QMessageBox()
             message_box.setText("An Error Has Accured")
             message_box.exec() 
+    
+   
+    def test(self):
+        x = self.testField.toPlainText()
+        y = x.split("\n")
+        results = []
+        #individual mail and pwd
+        for z in y:
+            a = z.split( )
+            #Getting Domain Details
+            conn = sqlite3.connect("domains.db")
+            c= conn.cursor()
+            domain = a[0]
+            x = domain.split("@", 1)
+            target_domain = x[1]
+            query=f"SELECT smtp_server, smtp_port, imap_server, imap_port FROM domains WHERE domain_name = '{target_domain}'"
+            c.execute(query)
+            result = list(c.fetchall())
+            result_tuple = result[0]
+            smtp_server, smtp_port, imap_server, imap_port = result_tuple
+            server = smtplib.SMTP(smtp_server, smtp_port)
+            try:
+                server.ehlo()
+                server.starttls()
+                server.ehlo()
+                server.login(a[0], a[1]) 
+                results +=[f"{a[0]} {a[1]} success "]
+            except:
+                results +=[f"{a[0]} {a[1]} failure "]        
+        for b in results:
+            self.resultField.setPlainText(str(b))
+        
+            
+            
+        
 
+
+             
 app = QApplication([])
 window = MyGui()
 app.exec_()

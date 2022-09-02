@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>772</width>
+    <width>824</width>
     <height>767</height>
    </rect>
   </property>
@@ -17,52 +17,201 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>110</y>
-      <width>711</width>
-      <height>591</height>
+      <x>20</x>
+      <y>40</y>
+      <width>771</width>
+      <height>681</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab_fetch">
      <attribute name="title">
       <string>Fetch</string>
      </attribute>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0">
-       <widget class="QPushButton" name="fetchButton">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Fetch your Mail</string>
-        </property>
-       </widget>
+     <widget class="QPushButton" name="fetchButton">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>180</y>
+        <width>81</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Fetch your Mail</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="fetchField">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>240</y>
+        <width>621</width>
+        <height>381</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>180</y>
+        <width>54</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Inbox</string>
+       </property>
       </item>
-      <item row="3" column="0">
-       <widget class="QTextEdit" name="fetchField">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
+      <item>
+       <property name="text">
+        <string>Sent</string>
+       </property>
       </item>
-      <item row="2" column="0">
-       <widget class="QComboBox" name="comboBox">
-        <item>
-         <property name="text">
-          <string>Inbox</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Sent</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
+     </widget>
+     <widget class="QLineEdit" name="emailField">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>70</y>
+        <width>161</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>aymane--13@outlook.com</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="pwdField">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>70</y>
+        <width>131</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>aout131995</string>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_pwd">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>70</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Password :</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_email">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>70</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>E-mail Address :</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="loginButton">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>70</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Login</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="searchField">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>180</y>
+        <width>131</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="termField">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>180</y>
+        <width>131</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_email_2">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>160</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Search Where</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_email_3">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>160</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>What about</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="searchButton">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>180</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Search</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="Send">
      <attribute name="title">
@@ -70,12 +219,12 @@
      </attribute>
      <widget class="QTextEdit" name="textField">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>100</y>
+        <x>90</x>
+        <y>130</y>
         <width>561</width>
         <height>311</height>
        </rect>
@@ -83,12 +232,12 @@
      </widget>
      <widget class="QLineEdit" name="toField">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>10</y>
+        <y>20</y>
         <width>501</width>
         <height>20</height>
        </rect>
@@ -96,12 +245,12 @@
      </widget>
      <widget class="QPushButton" name="attachButton">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>490</x>
-        <y>40</y>
+        <y>60</y>
         <width>131</width>
         <height>23</height>
        </rect>
@@ -114,7 +263,7 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>70</y>
+        <y>90</y>
         <width>47</width>
         <height>13</height>
        </rect>
@@ -127,7 +276,7 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>10</y>
+        <y>20</y>
         <width>71</width>
         <height>16</height>
        </rect>
@@ -138,12 +287,12 @@
      </widget>
      <widget class="QLineEdit" name="subjectField">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>40</y>
+        <y>60</y>
         <width>361</width>
         <height>20</height>
        </rect>
@@ -153,7 +302,7 @@
       <property name="geometry">
        <rect>
         <x>60</x>
-        <y>40</y>
+        <y>60</y>
         <width>71</width>
         <height>16</height>
        </rect>
@@ -164,12 +313,12 @@
      </widget>
      <widget class="QPushButton" name="sendButton">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>460</y>
+        <x>90</x>
+        <y>520</y>
         <width>561</width>
         <height>61</height>
        </rect>
@@ -181,8 +330,8 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>410</y>
+        <x>90</x>
+        <y>460</y>
         <width>561</width>
         <height>31</height>
        </rect>
@@ -199,10 +348,10 @@
      <attribute name="title">
       <string>Domains</string>
      </attribute>
-     <widget class="QLineEdit" name="domainField">
+     <widget class="QLineEdit" name="domaingrpField">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>400</x>
         <y>22</y>
         <width>197</width>
         <height>22</height>
@@ -217,7 +366,7 @@
      <widget class="QLineEdit" name="smtp_portField">
       <property name="geometry">
        <rect>
-        <x>368</x>
+        <x>400</x>
         <y>50</y>
         <width>196</width>
         <height>22</height>
@@ -240,9 +389,14 @@
        <rect>
         <x>570</x>
         <y>110</y>
-        <width>77</width>
+        <width>101</width>
         <height>24</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>Add Domain</string>
@@ -287,7 +441,7 @@
      <widget class="QLineEdit" name="imap_portField">
       <property name="geometry">
        <rect>
-        <x>368</x>
+        <x>400</x>
         <y>78</y>
         <width>196</width>
         <height>22</height>
@@ -308,7 +462,7 @@
      <widget class="QLabel" name="label_port_2">
       <property name="geometry">
        <rect>
-        <x>293</x>
+        <x>300</x>
         <y>78</y>
         <width>69</width>
         <height>22</height>
@@ -347,7 +501,7 @@
      <widget class="QLabel" name="label_port_3">
       <property name="geometry">
        <rect>
-        <x>293</x>
+        <x>300</x>
         <y>50</y>
         <width>69</width>
         <height>22</height>
@@ -383,9 +537,9 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>22</y>
-        <width>84</width>
+        <x>300</x>
+        <y>20</y>
+        <width>101</width>
         <height>22</height>
        </rect>
       </property>
@@ -395,7 +549,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Domain :</string>
+       <string>Domain Group :</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_4">
@@ -407,6 +561,11 @@
         <height>16</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>List of Domains :</string>
       </property>
@@ -414,11 +573,16 @@
      <widget class="QPushButton" name="listButton">
       <property name="geometry">
        <rect>
-        <x>480</x>
+        <x>456</x>
         <y>110</y>
-        <width>77</width>
+        <width>101</width>
         <height>24</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="text">
        <string>List Domains</string>
@@ -427,17 +591,11 @@
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>170</y>
-        <width>571</width>
-        <height>371</height>
+        <x>50</x>
+        <y>180</y>
+        <width>671</width>
+        <height>381</height>
        </rect>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>611</width>
-        <height>16777215</height>
-       </size>
       </property>
       <property name="lineWidth">
        <number>5</number>
@@ -445,6 +603,11 @@
       <attribute name="horizontalHeaderCascadingSectionResizes">
        <bool>false</bool>
       </attribute>
+      <column>
+       <property name="text">
+        <string>Domain Group</string>
+       </property>
+      </column>
       <column>
        <property name="text">
         <string>Domain Name</string>
@@ -531,75 +694,120 @@
        </property>
       </column>
      </widget>
+     <widget class="QLineEdit" name="domainField">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>20</y>
+        <width>197</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>84</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Domain :</string>
+      </property>
+     </widget>
     </widget>
-   </widget>
-   <widget class="QLabel" name="label_email">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>40</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>E-mail Address :</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="loginButton">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>80</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Login</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="emailField">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>40</y>
-      <width>201</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>aymane--13@outlook.com</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_pwd">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>40</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Password :</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="pwdField">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>40</y>
-      <width>201</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>aout131995</string>
-    </property>
-    <property name="echoMode">
-     <enum>QLineEdit::Password</enum>
-    </property>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Test</string>
+     </attribute>
+     <widget class="QTextEdit" name="testField">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>50</y>
+        <width>561</width>
+        <height>261</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>20</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Emails List to Test :</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="testButton">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>320</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Test</string>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="resultField">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>380</y>
+        <width>561</width>
+        <height>261</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>350</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Result :</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
