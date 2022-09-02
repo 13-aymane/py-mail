@@ -53,6 +53,12 @@ class MyGui(QMainWindow):
             self.server.ehlo()
             self.server.login(self.emailField.text(), self.pwdField.text())
 
+            self.fetchButton.setEnabled(True)
+            self.comboBox.setEnabled(True)
+            self.searchField.setEnabled(True)
+            self.termField.setEnabled(True)
+            self.searchButton.setEnabled(True)
+
             self.msg=MIMEMultipart()
 
             message_box = QMessageBox()

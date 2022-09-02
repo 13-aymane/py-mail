@@ -19,12 +19,12 @@
      <rect>
       <x>20</x>
       <y>40</y>
-      <width>771</width>
-      <height>681</height>
+      <width>1424</width>
+      <height>237</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_fetch">
      <attribute name="title">
@@ -36,9 +36,9 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>180</y>
-        <width>81</width>
+        <x>580</x>
+        <y>120</y>
+        <width>91</width>
         <height>23</height>
        </rect>
       </property>
@@ -60,12 +60,15 @@
       </property>
      </widget>
      <widget class="QComboBox" name="comboBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>180</y>
-        <width>54</width>
-        <height>20</height>
+        <x>430</x>
+        <y>120</y>
+        <width>91</width>
+        <height>21</height>
        </rect>
       </property>
       <item>
@@ -137,7 +140,7 @@
      <widget class="QPushButton" name="loginButton">
       <property name="geometry">
        <rect>
-        <x>550</x>
+        <x>590</x>
         <y>70</y>
         <width>75</width>
         <height>23</height>
@@ -148,9 +151,12 @@
       </property>
      </widget>
      <widget class="QLineEdit" name="searchField">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>230</x>
+        <x>170</x>
         <y>180</y>
         <width>131</width>
         <height>20</height>
@@ -161,9 +167,12 @@
       </property>
      </widget>
      <widget class="QLineEdit" name="termField">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>380</x>
+        <x>410</x>
         <y>180</y>
         <width>131</width>
         <height>20</height>
@@ -176,8 +185,8 @@
      <widget class="QLabel" name="label_email_2">
       <property name="geometry">
        <rect>
-        <x>240</x>
-        <y>160</y>
+        <x>70</x>
+        <y>180</y>
         <width>81</width>
         <height>16</height>
        </rect>
@@ -189,8 +198,8 @@
      <widget class="QLabel" name="label_email_3">
       <property name="geometry">
        <rect>
-        <x>400</x>
-        <y>160</y>
+        <x>330</x>
+        <y>180</y>
         <width>81</width>
         <height>16</height>
        </rect>
@@ -200,9 +209,12 @@
       </property>
      </widget>
      <widget class="QPushButton" name="searchButton">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>550</x>
+        <x>590</x>
         <y>180</y>
         <width>75</width>
         <height>23</height>
