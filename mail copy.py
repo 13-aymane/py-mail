@@ -1,3 +1,4 @@
+from os import sep
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
@@ -219,9 +220,10 @@ class MyGui(QMainWindow):
                 server.login(a[0], a[1]) 
                 results +=[f"{a[0]} {a[1]} success "]
             except:
-                results +=[f"{a[0]} {a[1]} failure "]        
-        for b in results:
-            self.resultField.setPlainText(str(b))
+                results +=[f"{a[0]} {a[1]} failure "]
+        res = "\n".join(results)
+        self.resultField.setPlainText(res)
+       
         
             
             
