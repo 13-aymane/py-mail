@@ -12,7 +12,7 @@ class Window(QWidget):
         self.setLayout(self.grid)
 
         self.label = QLabel(self)
-        self.label.setText("NO")
+        self.label.setText("Number")
         self.grid.addWidget(self.label, 0, 1)
 
 #        self.input1 = QLineEdit(self)
@@ -22,8 +22,8 @@ class Window(QWidget):
         self.input1.setValue(3)
 
         self.grid.addWidget(self.input1, 0, 5)
-
-        self.pushButton_ok = QPushButton("Press me", self)
+        #☻Button
+        self.pushButton_ok = QPushButton("Generate Terms", self)
         self.pushButton_ok.clicked.connect(self.addtextbox) #(self.addCheckbox)
         self.grid.addWidget(self.pushButton_ok, 0, 10)
 
@@ -40,7 +40,7 @@ class Window(QWidget):
 
         for n in range(self.input1.value()):
             self.bursttime = QLabel(self)
-            self.bursttime.setText("b_{}".format(n))
+            self.bursttime.setText("Term_{}".format(n))
 
             self.timeinput = QLineEdit(self)
             self.timeinput.textChanged.connect(lambda text, i=n : self.editChanged(text, i)) # +++
@@ -57,7 +57,7 @@ class Window(QWidget):
     def printvalues(self):  
         # fetch data in some way  
         for i, v in enumerate(self.lineEdits):                                               # +++
-            print("bursttime: b_{}, timeinput: {}".format(i, v))                             # +++
+            print("bursttime: Term_{}, timeinput: {}".format(i, v))                             # +++
 
 
     def editChanged(self, text, i):   # +++
@@ -69,7 +69,7 @@ class Window(QWidget):
 if __name__ == "__main__":
     application = QApplication(sys.argv)
     window = Window()
-    window.setWindowTitle('Dynamically adding textboxes using a push button')
+    window.setWindowTitle('test')
     window.resize(250, 180)
     window.show()
     sys.exit(application.exec_())
