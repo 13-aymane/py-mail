@@ -318,10 +318,9 @@ class MyGui(QMainWindow):
     def add_term(self):
         count = 1
         count = count + 1
-        inputField = QLineEdit()
-        self.formLayout.addWidget(inputField)
-        print(count)
-
+        inputField_2 = QLineEdit()
+        self.formLayout.addWidget(inputField_2)
+        print(self.inputField_2.text())
 
 app = QApplication([])
 window = MyGui()
