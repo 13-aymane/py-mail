@@ -33,6 +33,7 @@ class MyGui(QMainWindow):
         self.addButton.clicked.connect(self.add)
         self.listButton.clicked.connect(self.list)
         self.testButton.clicked.connect(self.test)
+        self.searchButton.clicked.connect(self.search)
     def login (self):
         try:
             #Getting Domain Details
@@ -55,7 +56,7 @@ class MyGui(QMainWindow):
 
             self.fetchButton.setEnabled(True)
             self.comboBox.setEnabled(True)
-            self.searchField.setEnabled(True)
+            self.searchBox.setEnabled(True)
             self.termField.setEnabled(True)
             self.searchButton.setEnabled(True)
 
@@ -198,8 +199,6 @@ class MyGui(QMainWindow):
             message_box = QMessageBox()
             message_box.setText("An Error Has Accured")
             message_box.exec() 
-    
-   
     def test(self):
         x = self.testField.toPlainText()
         y = x.split("\n")
@@ -225,17 +224,224 @@ class MyGui(QMainWindow):
                 server.ehlo()
                 server.login(a[0], a[1]) 
                 results +=[f"{a[0]} {a[1]} success "]
-            except:
+            except smtplib.SMTPAuthenticationError:
                 results +=[f"{a[0]} {a[1]} failure "]
+            except:
+                message_box = QMessageBox()
+                message_box.setText("Login Failed!")
+                message_box.exec()  
         res = "\n".join(results)
-        self.resultField.setPlainText(res)
-       
+        self.resultField.setPlainText(res)     
+    def search(self):
         
-            
-            
-        
+            #connection
+            conn = sqlite3.connect("domains.db")
+            c= conn.cursor()
+            domain = self.emailField.text()
+            x = domain.split("@", 1)
+            target_domain = x[1]
+            query=f"SELECT smtp_server, smtp_port, imap_server, imap_port FROM domains WHERE domain_name = '{target_domain}'"
+            c.execute(query)
+            results = list(c.fetchall())
+            results_tuple = results[0]
+            smtp_server, smtp_port, imap_server, imap_port = results_tuple    
+            imap = imaplib.IMAP4_SSL(imap_server, imap_port)
+            imap.login(self.emailField.text(),self.pwdField.text())
+            term = self.termField.text()
+            #search in InBox
+            if self.comboBox.currentText() == "Inbox":
+                imap.select("Inbox")
+                if self.searchBox.currentText() == "From":
 
+                    _, msgnums = imap.search(None, f'(FROM {term})')
 
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string())
+                elif self.searchBox.currentText() == "To":
+                    imap.select("Inbox")
+
+                    _, msgnums = imap.search(None, f'(TO {term})')
+
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string())
+                elif self.searchBox.currentText() == "Subject":
+                    imap.select("Inbox")
+
+                    _, msgnums = imap.search(None, f'(SUBJECT {term})')
+
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string())
+                elif self.searchBox.currentText() == "Body":
+                    imap.select("Inbox")
+
+                    _, msgnums = imap.search(None, f'(BODY {term})')
+
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string())
+                elif self.searchBox.currentText() == "Date":
+                    imap.select("Inbox")
+
+                    _, msgnums = imap.search(None, f'(SENTON {term})')
+
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string())                                     
+            #Serach in Sent
+            elif self.comboBox.currentText() == "Sent":
+                if self.searchBox.currentText() == "From":
+                    imap.select("Sent")
+
+                    _, msgnums = imap.search(None, f'(FROM {term})')
+
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string())
+                elif self.searchBox.currentText() == "To":
+                    imap.select("Sent")
+
+                    _, msgnums = imap.search(None, f'(TO {term})')
+
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string())
+                elif self.searchBox.currentText() == "Subject":
+                    imap.select("Sent")
+
+                    _, msgnums = imap.search(None, f'(SUBJECT {term})')
+
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string())
+                elif self.searchBox.currentText() == "Body":
+                    imap.select("Sent")
+
+                    _, msgnums = imap.search(None, f'(BODY {term})')
+
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string())
+                elif self.searchBox.currentText() == "Date":  
+                    imap.select("Inbox")
+
+                    _, msgnums = imap.search(None, f'(SENTON {term})')
+
+                    for msgnum in msgnums[0].split():
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+
+                    message = email.message_from_bytes(data[0][1])
+                    self.fetchField.setPlainText(f"Message Number: {msgnum}")
+                    self.fetchField.setPlainText(f"From: {message.get('From')}")
+                    self.fetchField.setPlainText(f"To: {message.get('To')}")
+                    self.fetchField.setPlainText(f"BCC: {message.get('BCC')}")
+                    self.fetchField.setPlainText(f"Date: {message.get('Date')}")
+                    self.fetchField.setPlainText(f"Subject: {message.get('From')}")
+                    self.fetchField.setPlainText(f"Content:")
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            self.fetchField.setPlainText(part.as_string()) 
              
 app = QApplication([])
 window = MyGui()

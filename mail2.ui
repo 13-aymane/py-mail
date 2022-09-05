@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>824</width>
-    <height>767</height>
+    <width>742</width>
+    <height>832</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>20</x>
       <y>40</y>
-      <width>1424</width>
-      <height>237</height>
+      <width>691</width>
+      <height>691</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -43,7 +43,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Fetch your Mail</string>
+       <string>Fetch All Mail</string>
       </property>
      </widget>
      <widget class="QTextEdit" name="fetchField">
@@ -65,8 +65,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>120</y>
+        <x>480</x>
+        <y>180</y>
         <width>91</width>
         <height>21</height>
        </rect>
@@ -150,29 +150,13 @@
        <string>Login</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="searchField">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>180</y>
-        <width>131</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="termField">
       <property name="enabled">
        <bool>false</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>410</x>
+        <x>330</x>
         <y>180</y>
         <width>131</width>
         <height>20</height>
@@ -185,7 +169,7 @@
      <widget class="QLabel" name="label_email_2">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>30</x>
         <y>180</y>
         <width>81</width>
         <height>16</height>
@@ -198,7 +182,7 @@
      <widget class="QLabel" name="label_email_3">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>240</x>
         <y>180</y>
         <width>81</width>
         <height>16</height>
@@ -223,6 +207,44 @@
       <property name="text">
        <string>Search</string>
       </property>
+     </widget>
+     <widget class="QComboBox" name="searchBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>180</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>From</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>To</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Subject</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Body</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Date</string>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="Send">
