@@ -1,6 +1,8 @@
 from os import sep
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
+from PyQt5 import Qt
+from PyQt5 import QtCore
 
 import smtplib
 import imaplib
@@ -38,6 +40,10 @@ class MyGui(QMainWindow):
         self.search_domainButton.clicked.connect(self.searchDomain)
         self.delete_domainButton.clicked.connect(self.deleteDomain)
         self.add_termButton.clicked.connect(self.add_term)
+        self.testButton_2.clicked.connect(self.test)
+        self.count = 1
+        self.lineEdits = []
+        self.c = 0
     def login (self):
         try:
             #Getting Domain Details
@@ -316,11 +322,28 @@ class MyGui(QMainWindow):
         except:
            pass
     def add_term(self):
-        count = 1
-        count = count + 1
-        inputField_2 = QLineEdit()
-        self.formLayout.addWidget(inputField_2)
-        print(self.inputField_2.text())
+        self.count += 1
+        
+        self.termLable = QLabel(self)
+        self.termLable.setText(f"Term {self.count} :")
+        self.gridLayout.addWidget(self.termLable)
+        
+        self.termForm = QLineEdit(self)
+        self.gridLayout.addWidget(self.termForm)
+    
+        test ="test"
+        self.termForm.text = test
+        for i in range(self.count):
+            self.lineEdits.insert( i, self.termForm.text)
+        self.count = self.c
+        return self.lineEdits, self.c    
+    def test(self):
+        for i in range(self.c):
+            self.lineEdits.insert( i, self.termForm.text)
+            return self.lineEdits
+        print(self.lineEdits)
+    def editChanged(self, text, i):  
+        self.lineEdits[i] = text 
 
 app = QApplication([])
 window = MyGui()

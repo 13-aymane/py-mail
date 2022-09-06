@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>30</y>
+      <y>10</y>
       <width>741</width>
       <height>771</height>
      </rect>
@@ -36,8 +36,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>560</x>
-        <y>160</y>
+        <x>430</x>
+        <y>240</y>
         <width>91</width>
         <height>23</height>
        </rect>
@@ -53,9 +53,9 @@
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>460</y>
+        <y>360</y>
         <width>621</width>
-        <height>261</height>
+        <height>361</height>
        </rect>
       </property>
      </widget>
@@ -65,8 +65,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>560</x>
-        <y>100</y>
+        <x>430</x>
+        <y>180</y>
         <width>91</width>
         <height>21</height>
        </rect>
@@ -153,14 +153,14 @@
      <widget class="QLabel" name="label_email_2">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>140</x>
         <y>110</y>
         <width>81</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Search Where</string>
+       <string>Search Where :</string>
       </property>
      </widget>
      <widget class="QPushButton" name="searchButton">
@@ -169,8 +169,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>560</x>
-        <y>130</y>
+        <x>430</x>
+        <y>210</y>
         <width>91</width>
         <height>23</height>
        </rect>
@@ -185,9 +185,9 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>220</x>
         <y>110</y>
-        <width>131</width>
+        <width>181</width>
         <height>21</height>
        </rect>
       </property>
@@ -195,20 +195,30 @@
        <string>FROM</string>
       </property>
      </widget>
-     <widget class="QWidget" name="formLayoutWidget">
+     <widget class="QWidget" name="gridLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>150</y>
-        <width>221</width>
-        <height>151</height>
+        <x>50</x>
+        <y>140</y>
+        <width>261</width>
+        <height>211</height>
        </rect>
       </property>
-      <layout class="QFormLayout" name="formLayout">
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetNoConstraint</enum>
+       </property>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="testButton_2">
+         <property name="text">
+          <string>Test</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="add_termButton">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>Add Term</string>
@@ -218,14 +228,14 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label_email_3">
          <property name="text">
-          <string>Term :</string>
+          <string>Term 1:</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
         <widget class="QLineEdit" name="termField">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string/>
