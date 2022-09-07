@@ -209,9 +209,9 @@
         <enum>QLayout::SetNoConstraint</enum>
        </property>
        <item row="0" column="0">
-        <widget class="QPushButton" name="testButton_2">
+        <widget class="QPushButton" name="remove_termButton">
          <property name="text">
-          <string>Test</string>
+          <string>Delete</string>
          </property>
         </widget>
        </item>
@@ -238,7 +238,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string/>
+          <string>13.aymane@gmail.com</string>
          </property>
         </widget>
        </item>
