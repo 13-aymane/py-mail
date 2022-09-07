@@ -42,9 +42,13 @@ class MyGui(QMainWindow):
         self.add_termButton.clicked.connect(self.add_term)
         self.remove_termButton.clicked.connect(self.remove_term)
         self.count = 1
-        self.lineEdits = [self.termField]
+        self.lineEdits = [self.termForm]
+        self.whereEdits = [self.whereForm]
         self.c = 0
         self.mail_list = []
+        self.comboList = []
+        self.list_terms = []
+        self.list_where =[]
     def login (self):
         try:
             #Getting Domain Details
@@ -67,11 +71,10 @@ class MyGui(QMainWindow):
 
             self.fetchButton.setEnabled(True)
             self.comboBox.setEnabled(True)
-            self.termField_2.setEnabled(True)
-            self.termField.setEnabled(True)
+            
             self.searchButton.setEnabled(True)
             self.add_termButton.setEnabled(True)
-            self.termField.setEnabled(True)
+            self.termForm.setEnabled(True)
             self.msg=MIMEMultipart()
 
             message_box = QMessageBox()
@@ -245,7 +248,7 @@ class MyGui(QMainWindow):
                 message_box.setText("Login Failed!")
                 message_box.exec()     
     def search(self):
-        try:
+        
             self.mail_list=[]
             res_mail= " "
             self.fetchField.setPlainText(res_mail)
@@ -265,43 +268,40 @@ class MyGui(QMainWindow):
             #search in InBox
             if self.comboBox.currentText() == "Inbox":
                 imap.select("Inbox")
-                
+                #making the query
                 for i in self.lineEdits:
-                    term = i.text()
-                    part = self.termField_2.text()
-                    mail_num = ""
-                    mail_from = ""
-                    mail_to = ""
-                    mail_bcc = ""
-                    mail_date = ""
-                    mail_subject = ""
-                    mail_content = ""
-                    mail_part = ""
-            
-                    _, msgnums = imap.search(None, f"{part} {term}")
-                    print(f"{part} {term}")
-                    for msgnum in msgnums[0].split():
-                        _, data = imap.fetch(msgnum, "(RFC822)")
-                        message = email.message_from_bytes(data[0][1])
-                        mail_num =f"Message Number: {msgnum}"
-                        mail_from =f"From: {message.get('From')}"
-                        mail_to = f"To: {message.get('To')}"
-                        mail_bcc = f"BCC: {message.get('BCC')}"
-                        mail_date = f"Date: {message.get('Date')}"
-                        mail_subject = f"Subject: {message.get('From')}"
-                        mail_content = f"Content:"
-                        for part in message.walk():
-                            if part.get_content_type() == "text/plain":
-                                mail_part = part.as_string()
-                        line = "========================================="
-                        mail = "\n".join([mail_num] + [mail_from] + [mail_to] + [mail_bcc] + [mail_date] + [mail_subject] + [mail_content] +[mail_part] + [line])           
-                        self.mail_list.append(mail)   
-                
+                    x = i.text()
+                    t=f'"{x}"'
+                    self.list_terms.append(t)
+                for j in self.whereEdits:
+                    #print(j.text())
+                    self.list_where.append(j.text())
+                l = list(map(' '.join, zip(self.list_where, self.list_terms)))
+                #print (l)
+                s = ' '.join(l)
+                print(s)
+                _, msgnums = imap.search(None, f'{s}')
+                for msgnum in msgnums[0].split():
+                            _, data = imap.fetch(msgnum, "(RFC822)")
+                            message = email.message_from_bytes(data[0][1])
+                            mail_num =f"Message Number: {msgnum}"
+                            mail_from =f"From: {message.get('From')}"
+                            mail_to = f"To: {message.get('To')}"
+                            mail_bcc = f"BCC: {message.get('BCC')}"
+                            mail_date = f"Date: {message.get('Date')}"
+                            mail_subject = f"Subject: {message.get('From')}"
+                            mail_content = f"Content:"
+                            for part in message.walk():
+                                if part.get_content_type() == "text/plain":
+                                    mail_part = part.as_string()
+                            line = "========================================="
+                            mail = "\n".join([mail_num] + [mail_from] + [mail_to] + [mail_bcc] + [mail_date] + [mail_subject] + [mail_content] +[mail_part] + [line])           
+                            self.mail_list.append(mail)   
+                    
                 res_mail = "\n".join(self.mail_list)
                 print(res_mail)
                 self.fetchField.setPlainText(res_mail)
-                self.fetchField.setEnabled(True)
-                            
+                self.fetchField.setEnabled(True) 
             #Search in Sent
             elif self.comboBox.currentText() == "Sent":
                 imap.select("Sent")
@@ -340,10 +340,7 @@ class MyGui(QMainWindow):
                 res_mail = "\n".join(self.mail_list)
                 print(res_mail)
                 self.fetchField.setPlainText(res_mail)       
-        except:
-            message_box = QMessageBox()
-            message_box.setText("An Error has Accured! Check that you entered the correct information!")
-            message_box.exec()
+        
     def searchDomain(self):
             conn = sqlite3.connect("domains.db")
             c= conn.cursor()
@@ -362,19 +359,28 @@ class MyGui(QMainWindow):
            pass
     def add_term(self):
         self.count += 1
+        #label
         self.termLable = QLabel(self)
         self.termLable.setText(f"Term {self.count} :")
         self.gridLayout.addWidget(self.termLable)
+        #term
         self.termForm = QLineEdit(self)
         self.gridLayout.addWidget(self.termForm )
         self.lineEdits.append(self.termForm)
-        return self.lineEdits    
+        #where
+        self.whereForm = QLineEdit(self)
+        self.gridLayout.addWidget(self.whereForm )
+        self.whereEdits.append(self.whereForm)
+        
+        return self.lineEdits, self.whereEdits    
     def remove_term(self):
         c = self.gridLayout.count()
-        #label
+        #Where
         self.gridLayout.itemAt(c-1).widget().setParent(None)
-        #field
+        #term
         self.gridLayout.itemAt(c-2).widget().setParent(None)
+        #label
+        self.gridLayout.itemAt(c-3).widget().setParent(None)
         
 
 app = QApplication([])

@@ -19,8 +19,8 @@
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>741</width>
-      <height>771</height>
+      <width>721</width>
+      <height>791</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -36,8 +36,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>240</y>
+        <x>560</x>
+        <y>160</y>
         <width>91</width>
         <height>23</height>
        </rect>
@@ -65,8 +65,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>180</y>
+        <x>560</x>
+        <y>100</y>
         <width>91</width>
         <height>21</height>
        </rect>
@@ -150,27 +150,14 @@
        <string>Login</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_email_2">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>110</y>
-        <width>81</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Search Where :</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="searchButton">
       <property name="enabled">
        <bool>false</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>210</y>
+        <x>560</x>
+        <y>130</y>
         <width>91</width>
         <height>23</height>
        </rect>
@@ -179,42 +166,19 @@
        <string>Search</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="termField_2">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>110</y>
-        <width>181</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>FROM</string>
-      </property>
-     </widget>
      <widget class="QWidget" name="gridLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>140</y>
-        <width>261</width>
-        <height>211</height>
+        <x>40</x>
+        <y>110</y>
+        <width>421</width>
+        <height>221</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <property name="sizeConstraint">
         <enum>QLayout::SetNoConstraint</enum>
        </property>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="remove_termButton">
-         <property name="text">
-          <string>Delete</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="add_termButton">
          <property name="enabled">
@@ -222,6 +186,23 @@
          </property>
          <property name="text">
           <string>Add Term</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="remove_termButton">
+         <property name="text">
+          <string>Delete</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_email_2">
+         <property name="text">
+          <string>Search Where :</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -233,12 +214,22 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="termField">
+        <widget class="QLineEdit" name="termForm">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="text">
           <string>13.aymane@gmail.com</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="whereForm">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>FROM</string>
          </property>
         </widget>
        </item>
