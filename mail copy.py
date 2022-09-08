@@ -1,3 +1,4 @@
+from itertools import count
 from os import sep
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -42,7 +43,7 @@ class MyGui(QMainWindow):
         self.add_termButton.clicked.connect(self.add_term)
         self.remove_termButton.clicked.connect(self.remove_term)
         self.count = 1
-        self.lineEdits = [self.termForm]
+        self.termEdits = [self.termForm]
         self.whereEdits = [self.whereForm]
         self.c = 0
         self.mail_list = []
@@ -275,100 +276,107 @@ class MyGui(QMainWindow):
                 message_box.setText("Login Failed!")
                 message_box.exec()     
     def search(self):
-        self.mail_list = []
-        self.comboList = []
-        self.list_terms = []
-        self.list_where =[]
-        self.result = ""
-        mail_where =""
-        mail_result =""
-        mail_list=[]
-        res_mail= ""
-        self.fetchField.setPlainText(res_mail)
-        #connection
-        conn = sqlite3.connect("domains.db")
-        c= conn.cursor()
-        domain = self.emailField.text()
-        x = domain.split("@", 1)
-        target_domain = x[1]
-        query=f"SELECT smtp_server, smtp_port, imap_server, imap_port FROM domains WHERE domain_name = '{target_domain}'"
-        c.execute(query)
-        results = list(c.fetchall())
-        results_tuple = results[0]
-        smtp_server, smtp_port, imap_server, imap_port = results_tuple    
-        imap = imaplib.IMAP4_SSL(imap_server, imap_port)
-        imap.login(self.emailField.text(),self.pwdField.text())
-        #search in InBox
-        if self.comboBox.currentText() == "Inbox":
-            imap.select("Inbox")
-            #making the query
-            for i in self.lineEdits:
-                x = i.text()
-                t=f'"{x}"'
-                self.list_terms.append(t)
-            for j in self.whereEdits:
-                z = j.text()
-                y = z.upper()
-                self.list_where.append(y)
-            l = list(map(' '.join, zip(self.list_where, self.list_terms)))
-            #print (l)
-            s = ' '.join(l)
-            #print(s)
-            #search 
-            _, msgnums = imap.search(None, f'{s}')
-            
-            for msgnum in msgnums[0].split():
-                line = "            =============================               "
-                for i in self.list_where:
-                    _, data = imap.fetch(msgnum, "(RFC822)")
-                    message = email.message_from_bytes(data[0][1])
-                    mail_where =f"{i}"
-                    mail_result =f": {message.get(f'{i}')}"
-                    mail = " ".join([mail_where] + [mail_result])           
-                    mail_list.append(mail)
-                mail_list.append(line)
-                
-            print(mail_list)
-            res_mail = "\n".join(mail_list)
-            print(res_mail)
+        try:
+            self.mail_list = []
+            self.comboList = []
+            self.list_terms = []
+            self.list_where =[]
+            self.list_toshow=[]
+            self.result = ""
+            mail_where =""
+            mail_result =""
+            mail_list=[]
+            res_mail= ""
             self.fetchField.setPlainText(res_mail)
-            self.fetchField.setEnabled(True) 
-        #Search in Sent
-        elif self.comboBox.currentText() == "Sent":
-            imap.select("Sent")
-            #making the query
-            for i in self.lineEdits:
-                x = i.text()
-                t=f'"{x}"'
-                self.list_terms.append(t)
-            for j in self.whereEdits:
-                z = j.text()
-                y = z.upper()
-                self.list_where.append(y)
-            l = list(map(' '.join, zip(self.list_where, self.list_terms)))
-            #print (l)
-            s = ' '.join(l)
-            #print(s)
-            #search 
-            _, msgnums = imap.search(None, f'{s}')
-            
-            for msgnum in msgnums[0].split():
-                line = "            =============================               "
-                for i in self.list_where:
-                    _, data = imap.fetch(msgnum, "(RFC822)")
-                    message = email.message_from_bytes(data[0][1])
-                    mail_where =f"{i}"
-                    mail_result =f": {message.get(f'{i}')}"
-                    mail = " ".join([mail_where] + [mail_result])           
-                    mail_list.append(mail)
-                mail_list.append(line)
+            #connection
+            conn = sqlite3.connect("domains.db")
+            c= conn.cursor()
+            domain = self.emailField.text()
+            x = domain.split("@", 1)
+            target_domain = x[1]
+            query=f"SELECT smtp_server, smtp_port, imap_server, imap_port FROM domains WHERE domain_name = '{target_domain}'"
+            c.execute(query)
+            results = list(c.fetchall())
+            results_tuple = results[0]
+            smtp_server, smtp_port, imap_server, imap_port = results_tuple    
+            imap = imaplib.IMAP4_SSL(imap_server, imap_port)
+            imap.login(self.emailField.text(),self.pwdField.text())
+            #search in InBox
+            if self.comboBox.currentText() == "Inbox":
+                imap.select("Inbox")
+                #making the query
+                for i in range(len(self.termEdits)):
+                    x = self.termEdits[i].text()
+                    z = self.whereEdits[i].text().upper()
+                    self.list_toshow.append(z)
+                    if x == "":
+                        continue
+                    self.list_terms.append(f'"{x}"')
+                    self.list_where.append(z)
+
+                l = list(map(' '.join, zip(self.list_where, self.list_terms)))
+                #print (l)
+                s = ' '.join(l)
+                #print(s)
+                #search 
+                _, msgnums = imap.search(None, f'{s}')
                 
-            print(mail_list)
-            res_mail = "\n".join(mail_list)
-            print(res_mail)
-            self.fetchField.setPlainText(res_mail)
-            self.fetchField.setEnabled(True)       
-        imap.close()   
+                for msgnum in msgnums[0].split():
+                    line = "            =============================               "
+                    for i in self.list_toshow:
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+                        message = email.message_from_bytes(data[0][1])
+                        mail_where =f"{i}"
+                        mail_result =f": {message.get(f'{i}')}"
+                        mail = " ".join([mail_where] + [mail_result])           
+                        mail_list.append(mail)
+                    mail_list.append(line)
+                    
+                print(mail_list)
+                res_mail = "\n".join(mail_list)
+                print(res_mail)
+                self.fetchField.setPlainText(res_mail)
+                self.fetchField.setEnabled(True) 
+            #Search in Sent
+            elif self.comboBox.currentText() == "Sent":
+                imap.select("Sent")
+                #making the query
+                for i in self.termEdits:
+                    x = i.text()
+                    t=f'"{x}"'
+                    self.list_terms.append(t)
+                for j in self.whereEdits:
+                    z = j.text()
+                    y = z.upper()
+                    self.list_where.append(y)
+                l = list(map(' '.join, zip(self.list_where, self.list_terms)))
+                #print (l)
+                s = ' '.join(l)
+                #print(s)
+                #search 
+                _, msgnums = imap.search(None, f'{s}')
+                
+                for msgnum in msgnums[0].split():
+                    line = "            =============================               "
+                    for i in self.list_where:
+                        _, data = imap.fetch(msgnum, "(RFC822)")
+                        message = email.message_from_bytes(data[0][1])
+                        mail_where =f"{i}"
+                        mail_result =f": {message.get(f'{i}')}"
+                        mail = " ".join([mail_where] + [mail_result])           
+                        mail_list.append(mail)
+                    mail_list.append(line)
+                    
+                print(mail_list)
+                res_mail = "\n".join(mail_list)
+                print(res_mail)
+                self.fetchField.setPlainText(res_mail)
+                self.fetchField.setEnabled(True)       
+            imap.close()
+        except:
+            message_box = QMessageBox()
+            message_box.setText("An error has accured! Please check the inserted data!")
+            message_box.exec()       
     def searchDomain(self):
             conn = sqlite3.connect("domains.db")
             c= conn.cursor()
@@ -398,15 +406,17 @@ class MyGui(QMainWindow):
         #term
         self.termForm = QLineEdit(self)
         self.gridLayout.addWidget(self.termForm )
-        self.lineEdits.append(self.termForm)
+        self.termEdits.append(self.termForm)
         
-        return self.lineEdits, self.whereEdits    
+        return self.termEdits, self.whereEdits    
     def remove_term(self):
         c = self.gridLayout.count()
         #Where
         self.gridLayout.itemAt(c-1).widget().setParent(None)
+        self.whereEdits.pop()
         #term
         self.gridLayout.itemAt(c-2).widget().setParent(None)
+        self.termEdits.pop()
         #label
         self.gridLayout.itemAt(c-3).widget().setParent(None)
         
